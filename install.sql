@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `wish_gifts`
+-- Struktur-dump for tabellen `wishy_gifts`
 --
 
-CREATE TABLE `wish_gifts` (
+CREATE TABLE `wishy_gifts` (
   `gift_id` bigint(20) NOT NULL,
   `gift_image` varchar(255) DEFAULT NULL,
   `gift_name` varchar(255) DEFAULT NULL,
@@ -39,22 +39,13 @@ CREATE TABLE `wish_gifts` (
   `gift_list` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Data dump for tabellen `wish_gifts`
---
-
-INSERT INTO `wish_gifts` (`gift_id`, `gift_image`, `gift_name`, `gift_qty`, `gift_reservations`, `gift_price`, `gift_note`, `gift_link`, `gift_list`) VALUES
-(9, '', 'Kaffekande', 6, 2, '200.00', '', '', 2),
-(10, '', 'Briller', 2, 1, '500.00', '', '', 2),
-(11, '', 'Vase', 5, 1, '9999.95', '', '', 4);
-
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `wish_lists`
+-- Struktur-dump for tabellen `wishy_lists`
 --
 
-CREATE TABLE `wish_lists` (
+CREATE TABLE `wishy_lists` (
   `list_id` bigint(20) NOT NULL,
   `list_date` datetime DEFAULT NULL,
   `list_title` text DEFAULT NULL,
@@ -65,21 +56,13 @@ CREATE TABLE `wish_lists` (
   `list_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Data dump for tabellen `wish_lists`
---
-
-INSERT INTO `wish_lists` (`list_id`, `list_date`, `list_title`, `list_subtitle`, `list_link`, `list_user`, `list_code`, `list_active`) VALUES
-(2, '2022-08-13 00:05:36', 'Bryllup', 'Caroline & Thomas', 'c81e728d9d4c2f636f067f89cc14862c', 1, '', 1),
-(4, '2021-12-10 19:00:50', 'Min fødselsdag', 'Thomas', 'a87ff679a2f3e71d9181a67b7542122c', 1, '123', 1);
-
 -- --------------------------------------------------------
 
 --
 -- Struktur-dump for tabellen `wish_sessions`
 --
 
-CREATE TABLE `wish_sessions` (
+CREATE TABLE `wishy_sessions` (
   `session_id` bigint(20) NOT NULL,
   `session_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `session_list` bigint(20) NOT NULL,
@@ -87,13 +70,6 @@ CREATE TABLE `wish_sessions` (
   `session_gifts` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Data dump for tabellen `wish_sessions`
---
-
-INSERT INTO `wish_sessions` (`session_id`, `session_date`, `session_list`, `session_hash`, `session_gifts`) VALUES
-(19, '2021-09-22 19:32:09', 2, '1f0e3dad99908345f7439f8ffabdffc4', '{\"9\":\"1\"}'),
-(20, '2021-09-22 19:39:21', 4, '1f0e3dad99908345f7439f8ffabdffc4', '{\"11\":\"1\"}');
 
 -- --------------------------------------------------------
 
@@ -101,7 +77,7 @@ INSERT INTO `wish_sessions` (`session_id`, `session_date`, `session_list`, `sess
 -- Struktur-dump for tabellen `wish_users`
 --
 
-CREATE TABLE `wish_users` (
+CREATE TABLE `wishy_users` (
   `user_id` bigint(20) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
@@ -111,38 +87,31 @@ CREATE TABLE `wish_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Data dump for tabellen `wish_users`
---
-
-INSERT INTO `wish_users` (`user_id`, `user_name`, `user_pass`, `user_email`, `user_reset`, `user_session`) VALUES
-(1, 'john', '1a1dc91c907325c69271ddf0c944bc72', 'john@example.com', '', 'c4ca4238a0b923820dcc509a6f75849b');
-
---
 -- Begrænsninger for dumpede tabeller
 --
 
 --
 -- Indeks for tabel `wish_gifts`
 --
-ALTER TABLE `wish_gifts`
+ALTER TABLE `wishy_gifts`
   ADD PRIMARY KEY (`gift_id`);
 
 --
--- Indeks for tabel `wish_lists`
+-- Indeks for tabel `wishy_lists`
 --
-ALTER TABLE `wish_lists`
+ALTER TABLE `wishy_lists`
   ADD PRIMARY KEY (`list_id`);
 
 --
--- Indeks for tabel `wish_sessions`
+-- Indeks for tabel `wishy_sessions`
 --
-ALTER TABLE `wish_sessions`
+ALTER TABLE `wishy_sessions`
   ADD PRIMARY KEY (`session_id`);
 
 --
--- Indeks for tabel `wish_users`
+-- Indeks for tabel `wishy_users`
 --
-ALTER TABLE `wish_users`
+ALTER TABLE `wishy_users`
   ADD PRIMARY KEY (`user_id`);
 
 --
@@ -150,28 +119,28 @@ ALTER TABLE `wish_users`
 --
 
 --
--- Tilføj AUTO_INCREMENT i tabel `wish_gifts`
+-- Tilføj AUTO_INCREMENT i tabel `wishy_gifts`
 --
-ALTER TABLE `wish_gifts`
-  MODIFY `gift_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `wishy_gifts`
+  MODIFY `gift_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `wish_lists`
+-- Tilføj AUTO_INCREMENT i tabel `wishy_lists`
 --
-ALTER TABLE `wish_lists`
-  MODIFY `list_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `wishy_lists`
+  MODIFY `list_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `wish_sessions`
+-- Tilføj AUTO_INCREMENT i tabel `wishy_sessions`
 --
-ALTER TABLE `wish_sessions`
-  MODIFY `session_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `wishy_sessions`
+  MODIFY `session_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `wish_users`
+-- Tilføj AUTO_INCREMENT i tabel `wishy_users`
 --
-ALTER TABLE `wish_users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `wishy_users`
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
