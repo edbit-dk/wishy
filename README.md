@@ -1,2 +1,2 @@
-# whishlist
-Whishlist. For all events.
+# Wishy
+Whishlists. For all events.
