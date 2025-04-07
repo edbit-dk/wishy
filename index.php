@@ -12,10 +12,9 @@
 
 
   <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Ønskelister</h1>
-      <p class="fs-5 text-muted">til alle begivenheder</p>
-      <p>Tilføj ønsker. På den måde, du plejer. Tilpasser sig dine behov.</p>
-      <a href="<?php echo $app['url'] ?>/auth/signup"><button type="button" class="w-25 btn btn-lg btn-primary">Opret profil</button></a>
+      <h1 class="display-4 fw-normal"><?php _e('sitename') ?></h1>
+      <p><?php _e('tagline') ?></p>
+      <a href="<?php echo $app['url'] ?>/auth/signup"><button type="button" class="w-25 btn btn-lg btn-primary"><?php _e('signup') ?></button></a>
     </div>
 
 <?php include 'app/templates/footer.php'; ?>    

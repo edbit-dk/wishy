@@ -7,7 +7,7 @@ if(!empty($_POST)) {
   $phptime = $app['db']->CleanDBData($_POST['date']);
   $mysqltime = date('Y-m-d H:i:s', strtotime($phptime));
 
-  $app['db']->Update('wish_lists', [
+  $app['db']->Update("{$db_prefix}lists", [
     'list_title' => $app['db']->CleanDBData($_POST['title']),
     'list_subtitle' => $app['db']->CleanDBData($_POST['subtitle']),
     'list_date' => $mysqltime,
@@ -17,7 +17,7 @@ if(!empty($_POST)) {
   header('Location: ' . $app['url'] . '/list/read');
 } 
 
-$list = $app['db']->Select('select * from wish_lists where list_id = ' . $list_id)[0]; 
+$list = $app['db']->Select("select * from {$db_prefix}lists where list_id = " . $list_id)[0]; 
 
 ?>
 

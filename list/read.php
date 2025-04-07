@@ -5,7 +5,7 @@ include '../app/includes/functions.php';
 is_auth(); 
 
 $user_id = user();
-$lists = $app['db']->Select("SELECT * FROM wish_lists WHERE list_user = $user_id"); 
+$lists = $app['db']->Select("SELECT * FROM {$db_prefix}lists WHERE list_user = $user_id"); 
 ?>
 
 <?php include '../app/templates/header.php'; ?>   
@@ -42,11 +42,11 @@ $lists = $app['db']->Select("SELECT * FROM wish_lists WHERE list_user = $user_id
         <tbody>
           <?php foreach($lists as $list): ?>
           <tr>
-            <td><?php echo $list['list_id']; ?></td>
+            <td><a href="<?php echo $app['url']; ?>/<?php echo $list['list_id'] ?>">ID</a></td>
             <td><?php echo $list['list_title']; ?></td>
             <td><?php echo $list['list_subtitle']; ?></td>
             <td><?php echo date('d-m-Y', strtotime($list['list_date'])); ?></td>
-            <td><a href="<?php echo $app['url']; ?>/<?php echo $list['list_id'] ?>">Link</a></td>
+            <td><a href="<?php echo $app['url']; ?>/<?php echo $list['list_link'] ?>">Link</a></td>
             <td><?php echo $list['list_code']; ?></td>
             <td>
             <a href="<?php echo $app['url']; ?>/gift/read?list=<?php echo $list['list_id']; ?>" class="btn btn-success">Ønsker</a>

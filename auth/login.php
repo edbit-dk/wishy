@@ -16,7 +16,7 @@ if(!empty($_POST)) {
 
   $login =  $app['db']->CleanDBData($_POST['login']);
   $password =  $app['db']->CleanDBData(md5($_POST['password']));
-  $user = $app['db']->Select("SELECT * FROM wish_users WHERE user_email = '$login' OR user_name = '$login' AND user_pass = '$password' ");
+  $user = $app['db']->Select("SELECT * FROM {$db_prefix}users WHERE user_email = '$login' OR user_name = '$login' AND user_pass = '$password' ");
 
   if(!empty($user)) {
 
@@ -24,7 +24,7 @@ if(!empty($_POST)) {
 
       $user_hash = md5($user[0]['user_id']);
   
-      $app['db']->Update('wish_users', [
+      $app['db']->Update("{$db_prefix}users", [
         'user_session' => $user_hash
       ], ['user_id' => $user[0]['user_id']]);
   

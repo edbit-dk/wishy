@@ -82,8 +82,8 @@ CREATE TABLE `wishy_users` (
   `user_name` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `user_reset` varchar(255) NOT NULL,
-  `user_session` varchar(255) NOT NULL
+  `user_reset` varchar(255) DEFAULT NULL,
+  `user_session` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

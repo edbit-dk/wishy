@@ -5,7 +5,7 @@ include '../app/includes/functions.php';
 $cookie_name = $app['cookie_name'];
 
 $list_request = $app['db']->CleanDBData($_GET['id']);
-$list = $app['db']->Select("SELECT * FROM wish_lists WHERE list_id = '$list_request' OR list_link = '$list_request'"); 
+$list = $app['db']->Select("SELECT * FROM {$db_prefix}lists WHERE list_id = '$list_request' OR list_link = '$list_request'"); 
 
 if(!empty($list)) {
   $list_id = $list[0]['list_id'];
@@ -16,11 +16,11 @@ if(!empty($list[0]['list_code']) && !list_auth($list_id)) {
 }
 
 if(!empty($list)) {
-  $gifts = $app['db']->Select("SELECT * FROM wish_gifts WHERE gift_list = '$list_id'"); 
+  $gifts = $app['db']->Select("SELECT * FROM {$db_prefix}gifts WHERE gift_list = '$list_id'"); 
 
   if(isset($_COOKIE[$cookie_name])) {
     $session_hash = $_COOKIE[$cookie_name];
-    $visitor = $app['db']->Select("SELECT * FROM wish_sessions WHERE session_list = '$list_id' AND session_hash = '$session_hash'"); 
+    $visitor = $app['db']->Select("SELECT * FROM {$db_prefix}sessions WHERE session_list = '$list_id' AND session_hash = '$session_hash'"); 
     if(!empty($visitor)) {
       $visitor = json_decode($visitor[0]['session_gifts'], true);
     }

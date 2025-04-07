@@ -17,6 +17,68 @@ function url($path = '') {
     echo $app['url'] . $path;
 }
 
+function short_link($uuid = '', $length = 11) {
+  $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_' . md5($uuid);
+  $id = '';
+  for ($i = 0; $i < $length; $i++) {
+      $id .= $characters[random_int(0, strlen($characters) - 1)];
+  }
+  return $id;
+}
+
+function get_lang() {
+  // Use session if available
+  if (session_status() === PHP_SESSION_NONE) {
+      session_start();
+  }
+
+  // 1. URL parameter
+  if (!empty($_GET['lang'])) {
+      $_SESSION['lang'] = $_GET['lang'];
+      return $_GET['lang'];
+  }
+
+  // 2. Session
+  if (!empty($_SESSION['lang'])) {
+      return $_SESSION['lang'];
+  }
+
+  // 3. Browser setting
+  if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+      $langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+      if (!empty($langs)) {
+          $primary = substr($langs[0], 0, 2);
+          return $primary;
+      }
+  }
+
+  // 4. Default fallback
+  return 'en';
+}
+
+function _e($key) {
+  static $cache = [];
+
+  $lang = get_lang();
+
+  // Load language file
+  if (!isset($cache[$lang])) {
+      $path = dirname(__DIR__)  . "/locale/$lang.php";
+      $cache[$lang] = file_exists($path) ? include $path : [];
+  }
+
+  // Fallback to English if key not found
+  if (!array_key_exists($key, $cache[$lang])) {
+      if (!isset($cache['en'])) {
+          $fallback = dirname(__DIR__)  . "/locale/en.php";
+          $cache['en'] = file_exists($fallback) ? include $fallback : [];
+      }
+      return $cache['en'][$key] ?? $key;
+  }
+
+  echo $cache[$lang][$key];
+}
+
 function list_login($list_id) {
     global $app;
     $name = app('list_name', false);
@@ -47,7 +109,7 @@ function cookie_logout() {
     $name = app('session_name', false);
     if(isset($_COOKIE[$name])) {
         unset($_COOKIE[$name]); 
-        setcookie($name, null, -1, '/'); 
+        setcookie($name, '', -1, '/'); 
         return true;
     }
     return false;

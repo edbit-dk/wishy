@@ -3,7 +3,7 @@
 include '../app/includes/functions.php'; 
 
 $user_id = user();
-$user = $app['db']->Select("SELECT * FROM wish_users WHERE user_id = '$user_id' ")[0];
+$user = $app['db']->Select("SELECT * FROM {$db_prefix}users WHERE user_id = '$user_id' ")[0];
 
 if(!empty($_POST)) {
 
@@ -11,11 +11,11 @@ if(!empty($_POST)) {
   $username = explode('@', $email)[0];
   $password =  $app['db']->CleanDBData(md5($_POST['password']));
 
-  $user = $app['db']->Select("SELECT * FROM wish_users WHERE user_email = '$email' ");
+  $user = $app['db']->Select("SELECT * FROM {$db_prefix}users WHERE user_email = '$email' ");
 
   if(!$user) {
       
-    $user_id = $app['db']->Insert('wish_users', [
+    $user_id = $app['db']->Insert("{$db_prefix}users", [
         'user_name' => $username,
         'user_email' => $email,
         'user_pass' => md5($password)

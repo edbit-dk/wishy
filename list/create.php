@@ -7,17 +7,16 @@ if(!empty($_POST)) {
   $phptime = $app['db']->CleanDBData($_POST['date']);
   $mysqltime = date('Y-m-d H:i:s', strtotime($phptime));
 
-  $list_id = $app['db']->Insert('wish_lists', [
+  $title = $app['db']->CleanDBData($_POST['title']);
+
+ $app['db']->Insert("{$db_prefix}lists", [
     'list_title' => $app['db']->CleanDBData($_POST['title']),
+    'list_link' => short_link($title),
     'list_date' => $mysqltime,
     'list_subtitle' => $app['db']->CleanDBData($_POST['subtitle']),
     'list_code' => $app['db']->CleanDBData($_POST['code']),
     'list_user' => user()
   ]);
-
-  $app['db']->Update('wish_lists', [
-    'list_link' => md5($list_id)
-  ], ['list_id' => $list_id]);
 
   header('Location: ' . $app['url'] . '/list/read');
 } 
